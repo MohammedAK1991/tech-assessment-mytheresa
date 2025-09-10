@@ -1,0 +1,126 @@
+// Flexbox Mixins
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+// Button Mixins
+@mixin button-base {
+  border: none;
+  border-radius: $border-radius-md;
+  font-weight: $font-weight-semibold;
+  cursor: pointer;
+  transition: all $transition-normal;
+  text-decoration: none;
+  display: inline-block;
+}
+
+@mixin button-primary {
+  @include button-base;
+  background-color: $primary-color;
+  color: $text-primary;
+  padding: $spacing-sm $spacing-lg;
+  
+  &:hover {
+    background-color: $primary-hover;
+    transform: translateY(-1px);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// Card Mixins
+@mixin card-base {
+  background-color: $background-card;
+  border-radius: $border-radius-lg;
+  border: 1px solid $border-color;
+  padding: $spacing-lg;
+}
+
+@mixin card-hover {
+  transition: all $transition-normal;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+}
+
+// Typography Mixins
+@mixin heading-large {
+  font-size: $font-size-3xl;
+  font-weight: $font-weight-bold;
+  color: $text-primary;
+  margin-bottom: $spacing-md;
+}
+
+@mixin heading-medium {
+  font-size: $font-size-2xl;
+  font-weight: $font-weight-semibold;
+  color: $text-primary;
+  margin-bottom: $spacing-md;
+}
+
+@mixin heading-small {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-semibold;
+  color: $text-primary;
+  margin-bottom: $spacing-sm;
+}
+
+@mixin text-body {
+  color: $text-secondary;
+  line-height: 1.6;
+  margin-bottom: $spacing-md;
+}
+
+// Layout Mixins
+@mixin container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $spacing-xl;
+}
+
+@mixin grid-responsive($columns: 2, $gap: $spacing-xl) {
+  display: grid;
+  grid-template-columns: repeat($columns, 1fr);
+  gap: $gap;
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// Placeholder Mixins
+@mixin placeholder-base {
+  @include flex-center;
+  background-color: $background-card;
+  border: 2px dashed $border-color;
+  border-radius: $border-radius-lg;
+  color: $text-muted;
+  font-size: $font-size-lg;
+}
+
+@mixin placeholder-large {
+  @include placeholder-base;
+  height: 16rem;
+}
+
+@mixin placeholder-medium {
+  @include placeholder-base;
+  height: 8rem;
+}

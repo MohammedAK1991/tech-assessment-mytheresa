@@ -1,0 +1,45 @@
+// Color Functions
+@function lighten-color($color, $amount: 10%) {
+  @return lighten($color, $amount);
+}
+
+@function darken-color($color, $amount: 10%) {
+  @return darken($color, $amount);
+}
+
+// Spacing Functions
+@function spacing($multiplier: 1) {
+  @return $spacing-md * $multiplier;
+}
+
+// Z-index Management
+$z-indexes: (
+  'modal': 1000,
+  'dropdown': 100,
+  'header': 50,
+  'default': 1
+);
+
+@function z-index($key) {
+  @return map-get($z-indexes, $key);
+}
+
+// Breakpoint Function
+@function breakpoint($size) {
+  $breakpoints: (
+    'xs': 480px,
+    'sm': 768px,
+    'md': 1024px,
+    'lg': 1200px,
+    'xl': 1440px
+  );
+  
+  @return map-get($breakpoints, $size);
+}
+
+// Media Query Mixin
+@mixin respond-to($breakpoint) {
+  @media (max-width: breakpoint($breakpoint)) {
+    @content;
+  }
+}
