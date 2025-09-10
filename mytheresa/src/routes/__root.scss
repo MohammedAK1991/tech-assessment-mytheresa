@@ -1,0 +1,36 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.navigation {
+  @include flex-between;
+  padding: $spacing-md;
+  background-color: $background-dark;
+  border-bottom: 1px solid $border-light;
+  
+  .nav-link {
+    color: $text-primary;
+    text-decoration: none;
+    padding: $spacing-sm $spacing-md;
+    border-radius: $border-radius-sm;
+    transition: all $transition-normal;
+    font-weight: $font-weight-medium;
+    
+    &:hover {
+      background-color: $background-card;
+      transform: translateY(-1px);
+    }
+    
+    &.active {
+      font-weight: $font-weight-bold;
+      background-color: $border-color;
+      color: $text-primary;
+    }
+  }
+}
+
+.nav-divider {
+  border: none;
+  height: 1px;
+  background-color: $border-light;
+  margin: 0;
+}
