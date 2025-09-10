@@ -6,12 +6,19 @@ export const Route = createRootRoute({
   component: () => (
     <>
       <div className="navigation">
-        <Link to="/" className="nav-link">
-          Home
-        </Link>
-        <Link to="/wishlist" className="nav-link">
-          Wishlist
-        </Link>
+        <div className="navigation__brand">
+          <Link to="/" className="nav-brand">
+            LuxExperience Movie App
+          </Link>
+        </div>
+        <div className="navigation__links">
+          <Link to="/" className="nav-link">
+            Home
+          </Link>
+          <Link to="/wishlist" className="nav-link">
+            Wishlist
+          </Link>
+        </div>
       </div>
       <hr className="nav-divider" />
       <Outlet />

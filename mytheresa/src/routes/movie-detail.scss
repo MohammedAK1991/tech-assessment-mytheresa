@@ -1,23 +1,46 @@
-@import '../styles/variables';
-@import '../styles/mixins';
+@use 'sass:color';
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
 
 .movie-detail {
-  @include container;
-  padding-top: $spacing-xl;
+  width: 100%;
+  padding: $spacing-lg;
   
   &__title {
     @include heading-large;
-    margin-bottom: $spacing-xl;
+    margin-top: $spacing-sm;
+    margin-bottom: $spacing-md;
+    text-align: left;
   }
   
   &__content {
-    @include grid-responsive(2, $spacing-xl);
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: $spacing-lg;
     margin-bottom: $spacing-xl;
+    align-items: start;
+    
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  &__right-column {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-lg;
+    height: 450px;
+    justify-content: space-between;
+  }
+  
+  &__button-description {
+    @include card-base;
+    padding: $spacing-lg;
   }
   
   &__image {
     position: relative;
-    height: 400px;
+    height: 450px;
     border-radius: $border-radius-lg;
     overflow: hidden;
     @include card-hover;
@@ -44,8 +67,9 @@
   
   &__meta {
     display: flex;
-    gap: $spacing-md;
+    gap: $spacing-sm;
     flex-wrap: wrap;
+    margin-bottom: $spacing-md;
     
     span {
       background-color: $background-card;
@@ -53,6 +77,7 @@
       border-radius: $border-radius-sm;
       font-size: $font-size-sm;
       color: $text-secondary;
+      font-weight: $font-weight-medium;
     }
   }
   
@@ -60,6 +85,7 @@
     display: flex;
     gap: $spacing-sm;
     flex-wrap: wrap;
+    margin-bottom: $spacing-md;
   }
   
   &__genre {
@@ -69,22 +95,43 @@
     border-radius: $border-radius-sm;
     font-size: $font-size-sm;
     font-weight: $font-weight-medium;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
   }
   
   &__description {
     @include text-body;
-    margin: 0;
+    margin: 0 0 $spacing-lg 0;
     line-height: 1.7;
+    color: $text-primary;
   }
   
   &__wishlist-btn {
     @include button-primary;
     align-self: flex-start;
+    
+    &--active {
+      @include button-base;
+      background-color: $danger-color;
+      color: white;
+      padding: $spacing-sm $spacing-lg;
+      
+      &:hover {
+        background-color: color.scale($danger-color, $lightness: -10%);
+        transform: translateY(-1px);
+      }
+      
+      &:active {
+        transform: translateY(0);
+      }
+    }
   }
   
   &__additional {
     @include card-base;
     @include card-hover;
+    padding: $spacing-lg;
+    margin-top: auto;
   }
   
   &__additional-title {

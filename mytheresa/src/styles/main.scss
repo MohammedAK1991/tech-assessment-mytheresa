@@ -1,6 +1,7 @@
 // Import all SCSS files
-@import 'variables';
-@import 'mixins';
+@use 'variables' as *;
+@use 'mixins' as *;
+@use 'functions' as *;
 
 // Global styles
 * {

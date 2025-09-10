@@ -1,3 +1,5 @@
+@use 'variables' as *;
+
 // Flexbox Mixins
 @mixin flex-center {
   display: flex;
@@ -46,9 +48,7 @@
 // Card Mixins
 @mixin card-base {
   background-color: $background-card;
-  border-radius: $border-radius-lg;
-  border: 1px solid $border-color;
-  padding: $spacing-lg;
+  padding: 0;
 }
 
 @mixin card-hover {

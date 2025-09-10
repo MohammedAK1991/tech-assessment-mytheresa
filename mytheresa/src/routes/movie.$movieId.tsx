@@ -1,6 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useMovieDetails } from '../hooks/useMovies'
 import { movieApi } from '../services/movieApi'
+import { useWishlistStore } from '../stores/wishlistStore'
 import './movie-detail.scss'
 
 export const Route = createFileRoute('/movie/$movieId')({
@@ -12,6 +13,17 @@ function MovieDetailPage() {
   const movieIdNumber = parseInt(movieId)
   
   const { data: movie, isLoading, isError } = useMovieDetails(movieIdNumber)
+  const { addMovie, removeMovie, isInWishlist } = useWishlistStore()
+  
+  const isInWishlistState = isInWishlist(movieIdNumber)
+  
+  const handleWishlistToggle = () => {
+    if (isInWishlistState) {
+      removeMovie(movieIdNumber)
+    } else {
+      addMovie(movieIdNumber)
+    }
+  }
 
   if (isLoading) {
     return (
@@ -37,6 +49,7 @@ function MovieDetailPage() {
       <h1 className="movie-detail__title">{movie.title}</h1>
       
       <div className="movie-detail__content">
+        {/* Image Area - Left Column */}
         <div className="movie-detail__image">
           {movie.backdrop_path ? (
             <img
@@ -49,45 +62,53 @@ function MovieDetailPage() {
           )}
         </div>
         
-        <div className="movie-detail__info">
-          <div className="movie-detail__meta">
-            <span className="movie-detail__year">
-              {new Date(movie.release_date).getFullYear()}
-            </span>
-            <span className="movie-detail__rating">
-              ⭐ {movie.vote_average.toFixed(1)}/10
-            </span>
-            <span className="movie-detail__runtime">
-              {movie.runtime} min
-            </span>
-          </div>
-          
-          <div className="movie-detail__genres">
-            {movie.genres.map((genre) => (
-              <span key={genre.id} className="movie-detail__genre">
-                {genre.name}
+        {/* Right Column - Button/Description + Additional Info */}
+        <div className="movie-detail__right-column">
+          {/* Button and Description Area */}
+          <div className="movie-detail__button-description">
+            <div className="movie-detail__meta">
+              <span className="movie-detail__year">
+                {new Date(movie.release_date).getFullYear()}
               </span>
-            ))}
+              <span className="movie-detail__rating">
+                ⭐ {movie.vote_average.toFixed(1)}/10
+              </span>
+              <span className="movie-detail__runtime">
+                {movie.runtime} min
+              </span>
+            </div>
+            
+            <div className="movie-detail__genres">
+              {movie.genres.map((genre) => (
+                <span key={genre.id} className="movie-detail__genre">
+                  {genre.name}
+                </span>
+              ))}
+            </div>
+            
+            <p className="movie-detail__description">
+              {movie.overview}
+            </p>
+            
+            <button 
+              className={`movie-detail__wishlist-btn ${isInWishlistState ? 'movie-detail__wishlist-btn--active' : ''}`}
+              onClick={handleWishlistToggle}
+            >
+              {isInWishlistState ? 'Remove from Wishlist' : 'Add to Wishlist'}
+            </button>
           </div>
           
-          <p className="movie-detail__description">
-            {movie.overview}
-          </p>
-          
-          <button className="movie-detail__wishlist-btn">
-            Add to Wishlist
-          </button>
-        </div>
-      </div>
-      
-      <div className="movie-detail__additional">
-        <h3 className="movie-detail__additional-title">Production Companies</h3>
-        <div className="movie-detail__companies">
-          {movie.production_companies.map((company) => (
-            <span key={company.id} className="movie-detail__company">
-              {company.name}
-            </span>
-          ))}
+          {/* Additional Info Area */}
+          <div className="movie-detail__additional">
+            <h3 className="movie-detail__additional-title">Production Companies</h3>
+            <div className="movie-detail__companies">
+              {movie.production_companies.map((company) => (
+                <span key={company.id} className="movie-detail__company">
+                  {company.name}
+                </span>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>

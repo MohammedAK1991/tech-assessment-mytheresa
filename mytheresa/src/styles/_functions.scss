@@ -1,10 +1,13 @@
+@use 'sass:color';
+@use 'variables' as *;
+
 // Color Functions
 @function lighten-color($color, $amount: 10%) {
-  @return lighten($color, $amount);
+  @return color.scale($color, $lightness: $amount);
 }
 
 @function darken-color($color, $amount: 10%) {
-  @return darken($color, $amount);
+  @return color.scale($color, $lightness: -$amount);
 }
 
 // Spacing Functions
