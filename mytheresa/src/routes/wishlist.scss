@@ -1,0 +1,30 @@
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.wishlist {
+  @include container;
+  padding-top: $spacing-xl;
+  
+  &__title {
+    @include heading-large;
+  }
+  
+  &__subtitle {
+    @include text-body;
+    margin-bottom: $spacing-xl;
+  }
+  
+  &__content {
+    margin-top: $spacing-xl;
+  }
+  
+  &__placeholder {
+    @include placeholder-medium;
+    @include card-hover;
+    
+    &:hover {
+      border-color: $primary-color;
+      color: $text-secondary;
+    }
+  }
+}
