@@ -1,9 +1,9 @@
 import { RouterProvider } from '@tanstack/react-router'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import { router } from './router'
+import { router as defaultRouter } from './router'
 
-const queryClient = new QueryClient({
+const defaultQueryClient = new QueryClient({
   defaultOptions: {
     queries: {
       staleTime: 5 * 60 * 1000, // 5 minutes
@@ -12,11 +12,16 @@ const queryClient = new QueryClient({
   },
 })
 
-function App() {
+interface AppProps {
+  router?: any
+  queryClient?: QueryClient
+}
+
+export function App({ router = defaultRouter, queryClient = defaultQueryClient }: AppProps = {}) {
   return (
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} />
-      <ReactQueryDevtools initialIsOpen={false} />
+      {typeof window !== 'undefined' && <ReactQueryDevtools initialIsOpen={false} />}
     </QueryClientProvider>
   )
 }
