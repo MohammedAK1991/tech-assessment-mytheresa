@@ -165,6 +165,31 @@
     margin: 0 0 $spacing-lg 0;
     line-height: 1.7;
     color: $text-primary;
+    max-height: 200px;
+    overflow-y: auto;
+    padding-right: $spacing-sm;
+    
+    // Custom scrollbar styling
+    scrollbar-width: thin;
+    scrollbar-color: $primary-color $background-card;
+    
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+    
+    &::-webkit-scrollbar-track {
+      background: $background-card;
+      border-radius: 3px;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background: $primary-color;
+      border-radius: 3px;
+      
+      &:hover {
+        background: color.scale($primary-color, $lightness: -10%);
+      }
+    }
   }
   
   &__wishlist-btn {

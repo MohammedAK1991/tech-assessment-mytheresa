@@ -4,10 +4,6 @@ import { movieApi } from '../services/movieApi'
 import type { Movie } from '../types/movie'
 import './index.scss'
 
-export const Route = createFileRoute('/')({
-  component: HomePage,
-})
-
 function HomePage() {
   const { popular, nowPlaying, topRated, isLoading, hasError } = useHomepageMovies()
 
@@ -96,3 +92,10 @@ function MovieCarousel({ title, movies }: { title: string; movies: Movie[] }) {
     </div>
   )
 }
+
+// Export HomePage for testing
+export { HomePage }
+
+export const Route = createFileRoute('/')({
+  component: HomePage,
+})
